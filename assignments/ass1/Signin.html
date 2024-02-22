@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sign In Form</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+body {
+
+    background-color: skyblue;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100vh;
+
+    margin: 0;
+
+}
+
+ 
+
+.signin-form {
+
+    background-color: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    width: 300px;
+
+    height: auto;
+
+}
+
+ 
+
+.form-group {
+
+    position: relative;
+
+    margin-bottom: 20px;
+
+}
+
+ 
+
+.form-group input {
+
+    width: calc(100% - 10px);
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+}
+
+ 
+
+button {
+
+    background-color: red;
+
+    color: white;
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 5px;
+
+}
+
+ 
+
+.error {
+
+    color: red;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+
+}
+
+ 
+
+.success {
+
+    color: green;
+
+    font-size: 18px;
+
+    margin-top: 10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+ 
+
+<form class="signin-form" id="signin-form">
+
+    <div class="form-group">
+
+        <input type="text" id="username" name="username" required placeholder="Username">
+
+        <div class="error" id="username-error"></div>
+
+    </div>
+
+ 
+
+    <div class="form-group">
+
+        <input type="password" id="password" name="password" required placeholder="Password">
+
+        <div class="error" id="password-error"></div>
+
+    </div>
+
+ 
+
+    <button type="submit">Sign In</button>
+
+    <div class="success" id="success-message" style="display: none;">Sign in successful!</div>
+
+</form>
+
+ 
+
+<script>
+
+document.getElementById('signin-form').addEventListener('submit', function(event) {
+
+    event.preventDefault();
+
+    validateForm();
+
+});
+
+ 
+
+function validateForm() {
+
+    const username = document.getElementById('username').value;
+
+    const password = document.getElementById('password').value;
+
+    let isValid = true;
+
+ 
+
+    // Example validation
+
+    if (username.trim() === '') {
+
+        showError('username-error', 'Please enter a username');
+
+        isValid = false;
+
+    } else {
+
+        clearError('username-error');
+
+    }
+
+ 
+
+    if (password.trim() === '') {
+
+        showError('password-error', 'Please enter a password');
+
+        isValid = false;
+
+    } else {
+
+        clearError('password-error');
+
+    }
+
+ 
+
+    if (isValid) {
+
+        // Show success message
+
+        document.getElementById('success-message').style.display = 'block';
+
+        // Clear form inputs
+
+        document.getElementById('signin-form').reset();
+
+    }
+
+}
+
+ 
+
+function showError(id, message) {
+
+    const errorElement = document.getElementById(id);
+
+    errorElement.innerText = message;
+
+}
+
+ 
+
+function clearError(id) {
+
+    const errorElement = document.getElementById(id);
+
+    errorElement.innerText = '';
+
+}
+
+</script>
+
+ 
+
+</body>
+
+</html>
