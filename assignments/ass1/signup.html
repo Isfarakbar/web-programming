@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            background-color: skyblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .registration-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            height: auto;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: calc(100% - 10px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: green;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<form class="registration-form" id="registration-form">
+    <div class="form-group">
+        <input type="text" id="username" name="username" required placeholder="Name">
+        <div class="error" id="username-error"></div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" id="password" name="password" required placeholder="Username">
+        <div class="error" id="password-error"></div>
+    </div>
+
+    <div class="form-group">
+        <input type="password" id="number" name="number" required placeholder="Password">
+        <div class="error" id="number-error"></div>
+    </div>
+
+    <div class="form-group">
+        <input type="number" id="phone" name="phone" required placeholder="Phone Number">
+        <div class="error" id="phone-error"></div>
+    </div>
+
+    <div class="form-group">
+        <input type="email" id="email" name="email" required placeholder="Email">
+        <div class="error" id="email-error"></div>
+    </div>
+
+    <div class="form-group">
+        <input type="number" id="age" name="age" required placeholder="Age">
+        <div class="error" id="age-error"></div>
+    </div>
+
+    <button type="submit">Register</button>
+    <div class="success" id="success-message" style="display: none;">Registration done!</div>
+</form>
+
+<script>
+    document.getElementById('registration-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        validateForm();
+    });
+
+    function validateForm() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const number = document.getElementById('number').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const age = document.getElementById('age').value;
+        let isValid = true;
+
+        
+        if (username.length < 5) {
+            showError('username-error', 'Username must be at least 5 characters');
+            isValid = false;
+        } else {
+            clearError('username-error');
+        }
+
+        // Validate Age
+        if (isNaN(age) || age < 18 || age > 100) {
+            showError('age-error', 'Age must be a valid number between 18 and 100');
+            isValid = false;
+        } else {
+            clearError('age-error');
+        }
+
+
+        if (isValid) {
+            // Show success message
+            document.getElementById('success-message').style.display = 'block';
+            // Clear form inputs
+            document.getElementById('registration-form').reset();
+        }
+    }
+
+    function showError(id, message) {
+        const errorElement = document.getElementById(id);
+        errorElement.innerText = message;
+    }
+
+    function clearError(id) {
+        const errorElement = document.getElementById(id);
+        errorElement.innerText = '';
+    }
+</script>
+
+</body>
+</html>
